@@ -27,19 +27,11 @@ public class RocketManager : MonoBehaviour
 
             text.text = "STOP ROCKET SPAWM";
         }
-        while (rocketSpawner)
-        {
-            if(!rocketSpawner)
-            {
-                break;
-            }
-            StartCoroutine(wait());
-        }
+        StartCoroutine(wait());
     }
     IEnumerator wait()
     {
         yield return new WaitForSeconds(1);
         Instantiate(rocket);
     }
-
 }
