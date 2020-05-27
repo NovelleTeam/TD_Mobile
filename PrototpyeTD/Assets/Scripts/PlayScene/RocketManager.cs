@@ -1,13 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RocketManager : MonoBehaviour
 {
     public GameObject rocket;
+    public TextMeshProUGUI text;
+    bool rocketSpawner;
 
-    public void spawnRocket()
+    private void Start()
     {
-
+        StartStopSpawnRocket();
     }
+
+    public void StartStopSpawnRocket()
+    {
+        if(rocketSpawner)
+        {
+            rocketSpawner = false;
+            text.text = "START ROCKET SPAWN";
+        }
+        if(!rocketSpawner)
+        {
+            rocketSpawner = true;
+
+            text.text = "STOP ROCKET SPAWM";
+        }
+        while (rocketSpawner)
+        {
+            if(!rocketSpawner)
+            {
+                break;
+            }
+            StartCoroutine(wait());
+        }
+    }
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1);
+        Instantiate(rocket);
+    }
+
 }
