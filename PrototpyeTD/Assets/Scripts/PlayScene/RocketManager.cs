@@ -26,8 +26,8 @@ public class RocketManager : MonoBehaviour
             rocketSpawner = true;
 
             text.text = "STOP ROCKET SPAWM";
+            StartCoroutine(wait());
         }
-        StartCoroutine(wait());
     }
     IEnumerator wait()
     {
