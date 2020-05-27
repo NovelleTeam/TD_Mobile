@@ -20,15 +20,17 @@ public class RocketSpawner : MonoBehaviour
     public void StartStopSpawnRocket()
     {
         rocketSpawner = !rocketSpawner;
-        debugText.text = rocketSpawner ? "START ROCKET SPAWN" : "STOP ROCKET SPAWM";
+        debugText.text = rocketSpawner ? "STOP ROCKET SPAWN" : "START ROCKET SPAWM";
         rocketSpawnTimer = spawnRate;
     }
     private void Update()
     {
         rocketSpawnTimer -= Time.deltaTime;
         if(rocketSpawnTimer <= 0){
+            if(rocketSpawner){
             ShootRocket();
             rocketSpawnTimer = spawnRate;
+            }
         }
     }
 
