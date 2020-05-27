@@ -6,14 +6,14 @@ using TMPro;
 public class RocketManager : MonoBehaviour
 {
     public GameObject rocket;
-    public TextMeshProUGUI text;
+    public TMP_Text text;
     bool rocketSpawner;
+    bool st;
 
     private void Start()
     {
         StartStopSpawnRocket();
     }
-
     public void StartStopSpawnRocket()
     {
         if(rocketSpawner)
@@ -29,9 +29,18 @@ public class RocketManager : MonoBehaviour
             StartCoroutine(wait());
         }
     }
+    private void FixedUpdate()
+    {
+        if (rocketSpawner & st)
+        {
+            StartCoroutine(wait());
+            st = false;
+        }
+    }
     IEnumerator wait()
     {
         yield return new WaitForSeconds(1);
         Instantiate(rocket);
+        st = true;
     }
 }
