@@ -8,7 +8,8 @@ public class RocketManager : MonoBehaviour
     public GameObject rocket;
     public TMP_Text text;
     bool rocketSpawner;
-    bool st;
+    public float rateOfSpawning;
+
 
     private void Start()
     {
@@ -16,31 +17,16 @@ public class RocketManager : MonoBehaviour
     }
     public void StartStopSpawnRocket()
     {
-        if(rocketSpawner)
-        {
-            rocketSpawner = false;
-            text.text = "START ROCKET SPAWN";
-        }
-        if(!rocketSpawner)
-        {
-            rocketSpawner = true;
+        text.text = rocketSpawner ? "START ROCKET SPAWN" : "STOP ROCKET SPAWM";
+        rocketSpawner = rocketSpawner ? true : false;
+    }
+    private void Update()
+    {
 
-            text.text = "STOP ROCKET SPAWM";
-            StartCoroutine(wait());
-        }
-    }
-    private void FixedUpdate()
-    {
-        if (rocketSpawner & st)
+        if (rocketSpawner)
         {
-            StartCoroutine(wait());
-            st = false;
+
+            Instantiate(rocket);
         }
-    }
-    IEnumerator wait()
-    {
-        yield return new WaitForSeconds(1);
-        Instantiate(rocket);
-        st = true;
     }
 }
